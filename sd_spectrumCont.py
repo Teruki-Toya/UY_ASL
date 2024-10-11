@@ -11,6 +11,7 @@ import numpy as np
 from matplotlib.animation import FuncAnimation
 import matplotlib.pyplot as plt
 from scipy import signal
+import wdFunc
 
 # sd.default.device = [27, 26] # Input, Outputデバイス指定
 
@@ -40,7 +41,7 @@ length = int(1000 * 44100 / (1000 * downsample))
 plotdata = np.zeros((length))
 N =2048            # FFT用のサンプル数
 fs = 44100            # 音声データのサンプリング周波数
-window = signal.hann(N) # 窓関数
+window = wdFunc.winHann(N) # 窓関数
 freq = np.fft.fftfreq(N, d=1 / fs) # 周波数スケール
 
 fig, ax = plt.subplots()
