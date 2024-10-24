@@ -49,7 +49,7 @@ def sigsTimeSyncronize(sig1, sig0):
   return sig1r
 
 ## シフトしながら短時間フレームに分割 -----------------------------
-def specByFrm(x, fs, winSize, shiftSize = -9999):
+def shiftFrmDiv(x, fs, winSize, shiftSize = -9999):
   """
   < 入力 >
     x:  分析対象の時間波形（系列データ）
