@@ -5,6 +5,7 @@
 import numpy as np
 import numpy.matlib as nmat
 import scipy.fftpack as spfft
+import analTemp
 import wdFunc
 import lpcas
 
@@ -68,11 +69,7 @@ def specByFrm(x, fs, winSize, shiftSize = -9999, fftSize = -9999):
   N_frame = int(np.floor((len(x) - (winSize - shiftSize)) / shiftSize))
   
   # フレームごとに分割した波形行列 [フレーム数 × 窓長]
-  x_frm = np.zeros((N_frame, winSize))
-  for frame in range(N_frame):
-    offset = shiftSize * frame  # フレームをシフトしながら
-    s = x[offset : offset + winSize]
-    x_frm[frame, :] = s
+  x_frm = analTemp.shiftFrmDiv(x, fs, winSize, shiftSize)
   
   w = nmat.repmat(wdFunc.winHann(winSize), N_frame, 1)
   x_frmw = x_frm * w	# 分析窓をかける
